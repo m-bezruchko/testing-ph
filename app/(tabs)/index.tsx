@@ -1,9 +1,10 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import {Image, StyleSheet, Platform, View, Button} from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import {posthog} from "@/app/_layout";
 
 export default function HomeScreen() {
   return (
@@ -18,6 +19,16 @@ export default function HomeScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
+
+          <View style={{padding: 24}}>
+              <Button
+                  onPress={() => {
+                      posthog.capture('Test PostHog Event')
+                      alert('The "Test PostHog Event" event has been sent')
+                  }}
+                  title={'Send PostHog Event'}
+              />
+          </View>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
